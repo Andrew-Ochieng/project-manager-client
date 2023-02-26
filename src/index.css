@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.form-input {
+  @apply input input-bordered input-info my-4 w-full max-w-xs
+}

@@ -34,9 +34,12 @@ const Navbar = () => {
                                 </li>
                             ))}
                             <li className='md:mx-8 md:my-0 my-4'>
-                                <a target='_blank' className="bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
-                                    Open Learn
-                                </a>
+                                <Link to='/login' className="bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                    Login
+                                </Link>
+                                <Link to='/signup' className="bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                    Signup
+                                </Link>
                             </li>
                         </ul>
                     </div>

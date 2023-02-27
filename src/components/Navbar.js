@@ -13,10 +13,10 @@ const Navbar = () => {
 
     return ( 
         <>
-            <nav className='lg:px-48 md:px-32 px-8 md:py-6 py-4 top-0 left-0 sticky z-[100] bg-sky-300 opacity-100 shadow-xl'>
+            <nav className='lg:px-48 md:px-32 px-8 md:py-6 py-4 top-0 left-0 sticky z-[100] bg-sky-400 opacity-100 shadow-xl'>
                 <div className='md:flex items-center justify-between'>
                     <div className="flex justify-between items-center">
-                        <Link to='/' className='md:text-3xl text-2xl uppercase font-semibold '>
+                        <Link to='/' className='md:text-2xl text-lg uppercase font-semibold '>
                             {/* <img className="md:w-32 w-28 " src={logo} alt="Logo.." /> */}
                             Project Manager
                         </Link>
@@ -33,11 +33,11 @@ const Navbar = () => {
                                     <Link to={navLink.route}>{navLink.name}</Link>
                                 </li>
                             ))}
-                            <li className='md:mx-8 md:my-0 my-4'>
-                                <Link to='/login' className="bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                            <li className=' md:my-0 my-4'>
+                                <Link to='/login' className="mx-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
                                     Login
                                 </Link>
-                                <Link to='/signup' className="bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                <Link to='/signup' className="mx-4 bg-sky-800 px-3 py-1 hover:bg-white text-white hover:text-sky-800 duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
                                     Signup
                                 </Link>
                             </li>
@@ -45,7 +45,7 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <div className={`${open ? "left-0 " : "left-[-100%]"} sm:hidden absolute top-0 right-0 bottom-0  space-y-8 py-6 px-8 w-full h-screen duration-300 ease-in-out bg-sky-400/95    `}>
+                <div className={`${open ? "left-0 " : "left-[-100%]"} sm:hidden absolute top-0 right-0 bottom-0  space-y-8 py-6 px-8 w-full h-screen duration-300 ease-in-out bg-sky-400`}>
                     <div className="flex justify-end">
                         <button onClick={() => setOpen((prev) => !prev)} className="mb-8 sm:hidden text-2xl text-gray-100 text-right">
                                 <FaTimes/> 
@@ -57,10 +57,13 @@ const Navbar = () => {
                                 <Link to={navLink.route}>{navLink.name}</Link>
                             </li>
                         ))}
-                        <li className='md:mx-8 md:my-0 my-4'>
-                            <a target='_blank' className="px-3 py-1 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
-                                Open Learn
-                            </a>
+                        <li className='flex flex-col md:my-0 my-4'>
+                            <Link to='/login' className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                Login
+                            </Link>
+                            <Link to='/signup' className="mx-4 my-4 bg-sky-800 px-3 py-1 hover:bg-white text-white hover:text-sky-800 duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                Signup
+                            </Link>
                         </li>
                     </ul>
                 </div>

@@ -34,6 +34,7 @@ const AddProject = () => {
                         <input 
                             type="text"  
                             class="form-input"
+                            placeholder="Project name"
                             value={projectName}
                             onChange={(e) => setProjectName(e.target.value)} 
                         />
@@ -45,6 +46,7 @@ const AddProject = () => {
                         <input 
                             type="password" 
                             class="form-input"
+                            placeholder="Topic"
                             value={topic}
                             onChange={(e) => setTopic(e.target.value)} 
                         />
@@ -56,7 +58,7 @@ const AddProject = () => {
                         <textarea 
                             class="textarea textarea-info w-full my-4" 
                             rows='4'
-                            placeholder="Bio"
+                            placeholder="Details"
                             value={details}
                             onChange={(e) => setDetails(e.target.value)}
                         ></textarea>

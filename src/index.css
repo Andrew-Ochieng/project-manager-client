@@ -4,5 +4,16 @@
 
 
 .form-input {
-  @apply input input-bordered input-info my-4 w-full max-w-xs
+  @apply input input-bordered input-info my-4 w-full w-full
 }
+
+.form-label {
+  @apply text-xl 
+}
+
+
+
+
+
+
+

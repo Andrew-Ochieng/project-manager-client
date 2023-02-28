@@ -57,7 +57,7 @@ const Navbar = () => {
                                 <Link to={navLink.route}>{navLink.name}</Link>
                             </li>
                         ))}
-                        <li className='flex flex-col md:my-0 my-4'>
+                        <li className='flex flex-col md:my-0 my-4' onClick={() => setOpen((prev) => !prev)}>
                             <Link to='/login' className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
                                 Login
                             </Link>

@@ -4,11 +4,15 @@
 
 
 .form-input {
-  @apply input input-bordered input-info my-4 w-full w-full
+  @apply input input-bordered input-info my-4 w-full 
 }
 
 .form-label {
   @apply text-xl 
+}
+
+.title {
+  @apply text-sky-800 font-black md:text-6xl text-3xl text-center md:tracking-wide md:mb-8 mb-4
 }
 
 

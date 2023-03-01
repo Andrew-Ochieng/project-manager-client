@@ -18,6 +18,7 @@ const Login = () => {
 
     function handleForm(e) {
         e.preventDefault();
+        
         console.log(`${apiHost}/login`)
         fetch(`${apiHost}/login`, {
             method: "POST",
@@ -29,6 +30,7 @@ const Login = () => {
         .then(result => {
             if(result.ok){
                 result.json().then(data => console.log(data))
+                setSigninFormData({username: "", password: ""})
             }else {
                 result.json().then(error => console.warn(error))
             }

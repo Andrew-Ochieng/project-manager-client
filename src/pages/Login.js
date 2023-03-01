@@ -24,7 +24,6 @@ const Login = ({loggedIn, setLoggedIn}) => {
     function handleForm(e) {
         e.preventDefault();
 
-        console.log(`${apiHost}/login`)
         fetch(`${apiHost}/login`, {
             method: "POST",
             headers: {

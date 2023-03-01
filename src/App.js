@@ -12,7 +12,6 @@ import Signup from './pages/Signup';
 function App() {
   const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
 
-  console.log("Logged in: ", loggedIn)
   return (
     <div className="App">
       <BrowserRouter>

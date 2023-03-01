@@ -1,26 +1,47 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
 import signupImg from '../assets/signup.png'
+import { apiHost } from "../Variables";
 
 const Signup = () => {
-    const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [signupFormData, setSignupFormData] = useState(
+        {
+            email: "",
+            username: "",
+            password: ""
+        }
+    )
 
-    const handleForm = (e) => {
+    function updateFormData(e){
+        setSignupFormData(
+            signupFormData => ({
+                ...signupFormData,
+                [e.target.id]: e.target.value
+            })
+        )
+    }
+
+    function handleForm(e) {
         e.preventDefault();
-        e.target.reset();
 
-        fetch('/login', {
+        fetch(`${apiHost}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password})
+            body: JSON.stringify(signupFormData)
         })
-            .then()
-
-        alert("hello")
+        .then(result => {
+            if(result.ok){
+                result.json().then(data => {
+                    localStorage.setItem('loggedIn', true)
+                    localStorage.setItem('user', data)
+                    setSignupFormData({email: "", username: "", password: ""})
+                })
+            }else {
+                result.json().then(error => console.warn(error))
+            }
+        })
     }
 
     return ( 
@@ -35,29 +56,32 @@ const Signup = () => {
                         <form onSubmit={handleForm}>
                             <div>
                                 <input 
+                                    id="username"
                                     type="text" 
                                     placeholder="Enter username.." 
                                     class="form-input"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)} 
+                                    value={signupFormData.username}
+                                    onChange={updateFormData} 
                                 />
                             </div>
                             <div>
                                 <input 
+                                    id="email"
                                     type="email" 
                                     placeholder="Enter email.." 
                                     class="form-input"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)} 
+                                    value={signupFormData.email}
+                                    onChange={updateFormData} 
                                 />
                             </div>
                             <div>
                                 <input 
+                                    id="password"
                                     type="password" 
                                     placeholder="Enter password.." 
                                     class="form-input"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)} 
+                                    value={signupFormData.password}
+                                    onChange={updateFormData} 
                                 />
                             </div>
                             <button className="btn btn-secondary w-full">

@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"
 import { apiHost } from "../Variables";
 
 const Navbar = ({loggedIn, setLoggedIn}) => {
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
 
     function logoutUser(){
         localStorage.clear()
         setLoggedIn(false)
-        
+        navigate('/')
+
         fetch(`${apiHost}/logout`, {method: 'DELETE'})
         .then(res => {
             if(!res.ok){

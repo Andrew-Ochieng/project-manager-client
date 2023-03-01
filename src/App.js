@@ -19,7 +19,7 @@ function App() {
         <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Routes>
           <Route path='/' element={ <Home /> } />
-          <Route path='/projects' element={ <Projects /> }/>
+          <Route path='/projects' element={ <Projects loggedIn={loggedIn}/> }/>
           <Route path='/addproject' element={ <AddProject /> }/>
           <Route path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/signup' element={ <Signup loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> }/>

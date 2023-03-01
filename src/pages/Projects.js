@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { apiHost } from "../Variables";
 
-const Projects = () => {
+const Projects = ({loggedIn}) => {
+    const navigate = useNavigate()
     const [projects, setProjects] = useState([])
+
+    if(!loggedIn){
+        navigate('/')
+    }
 
     useEffect(()=>{
         fetch(`${apiHost}/projects`)

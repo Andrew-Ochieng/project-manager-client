@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { apiHost } from "../Variables";
 
 const Projects = () => {
@@ -21,7 +22,7 @@ const Projects = () => {
             <div className="flex flex-col">
                 <div className="flex justify-between my-5">
                     <h1 className="font-bold">YOUR PROJECTS</h1>
-                    <button className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">Add New</button>
+                    <Link to="/add-project" className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">Add New</Link>
                 </div>
                 <table>
                     {

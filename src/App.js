@@ -23,6 +23,7 @@ function App() {
           <Route path='/addproject' element={ <AddProject /> }/>
           <Route path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> }/>
           <Route path='/signup' element={ <Signup loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> }/>
+          <Route path='/add-project' element={<AddProject />}/>
         </Routes>
         <Footer />
       </BrowserRouter>

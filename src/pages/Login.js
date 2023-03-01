@@ -3,23 +3,28 @@ import { Link } from "react-router-dom";
 import loginImg from "../assets/login.png"
 
 const Login = () => {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [signinFormData, setSigninFormData] = useState({username: "", password: ""})
+
+    function updateFormData(e){
+        setSigninFormData(
+            signinFormData => ({
+                ...signinFormData,
+                [e.target.id]: e.target.value
+            })
+        )
+    }
 
     const handleForm = (e) => {
         e.preventDefault();
-        e.target.reset();   
-
+        console.log(signinFormData)
         fetch('/login', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password})
+            body: JSON.stringify(signinFormData)
         })
-            .then()
-
-        alert("hello")
+        .then()
     }
 
     return ( 
@@ -34,20 +39,22 @@ const Login = () => {
                         <form onSubmit={handleForm}>
                             <div>
                                 <input 
+                                    id="username"
                                     type="text" 
                                     placeholder="Enter username.." 
                                     class="form-input"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)} 
+                                    value={signinFormData.username}
+                                    onChange={updateFormData} 
                                 />
                             </div>
                             <div>
                                 <input 
+                                    id="password"
                                     type="password" 
                                     placeholder="Enter password.." 
                                     class="form-input"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)} 
+                                    value={signinFormData.password}
+                                    onChange={updateFormData} 
                                 />
                             </div>
                             <button className="btn btn-secondary w-full">

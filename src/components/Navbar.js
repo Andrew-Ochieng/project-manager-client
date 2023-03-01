@@ -7,7 +7,7 @@ const Navbar = ({loggedIn}) => {
 
     const navLinks = [
         {name: "About", route: "/about"},
-        {name: "Services", route: "/services"},
+        {name: "Projects", route: "/projects"},
         {name: "Contact", route: "/contact"}
     ]
 

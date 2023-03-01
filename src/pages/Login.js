@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import loginImg from "../assets/login.png"
+import { apiHost } from "../Variables";
 
 const Login = () => {
     const [signinFormData, setSigninFormData] = useState({username: "", password: ""})
+    console.log("apiHost: ", apiHost)
 
     function updateFormData(e){
         setSigninFormData(
@@ -14,17 +16,23 @@ const Login = () => {
         )
     }
 
-    const handleForm = (e) => {
+    function handleForm(e) {
         e.preventDefault();
-        console.log(signinFormData)
-        fetch('/login', {
+        console.log(`${apiHost}/login`)
+        fetch(`${apiHost}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(signinFormData)
         })
-        .then()
+        .then(result => {
+            if(result.ok){
+                result.json().then(data => console.log(data))
+            }else {
+                result.json().then(error => console.warn(error))
+            }
+        })
     }
 
     return ( 

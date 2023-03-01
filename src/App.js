@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar loggedIn={loggedIn}/>
+        <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Routes>
           <Route path='/' element={ <Home /> } />
           <Route path='/projects' element={ <Projects /> }/>

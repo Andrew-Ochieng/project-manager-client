@@ -1,24 +1,51 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { apiHost } from "../../Variables";
 
 const AddProject = () => {
-    const [projectName, setProjectName] = useState("")
-    const [topic, setTopic] = useState("")
-    const [details, setDetails] = useState("")
+    const [newProjectFormData, setNewProjectFormData] = useState(
+        {
+            name: "",
+            topic: "",
+            details: "",
+            user_id: JSON.parse(localStorage.getItem('user') || false)?.id
+        }
+    )
 
+    function updateFormData(e){
+
+        setNewProjectFormData(newProjectFormData => {
+            return {...newProjectFormData, [e.target.id]: e.target.value}
+        })
+
+    }
 
     const handleForm = (e) => {
         e.preventDefault();
-        e.target.reset();   
+        console.log(newProjectFormData)
 
-        fetch('/', {
+        fetch(`${apiHost}/projects`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({projectName, topic, details})
+            body: JSON.stringify(newProjectFormData)
         })
-            .then()
+        .then(res => {
+            if(res.ok){
+                res.json().then(data => {
+                    setNewProjectFormData(
+                        {
+                            name: "",
+                            topic: "",
+                            details: "",
+                            user_id: JSON.parse(localStorage.getItem('user') || false)?.id
+                        }
+                    )
+                })
+            }else {
+                res.json().then(error => console.warn(error))
+            }
+        })
 
         alert("hello")
     }
@@ -33,11 +60,12 @@ const AddProject = () => {
                             Project Name
                         </label>
                         <input 
+                            id="name"
                             type="text"  
                             class="form-input"
                             placeholder="Project name"
-                            value={projectName}
-                            onChange={(e) => setProjectName(e.target.value)} 
+                            value={newProjectFormData.name}
+                            onChange={updateFormData} 
                         />
                     </div>
                     <div>
@@ -45,11 +73,12 @@ const AddProject = () => {
                             Subject/ Topic
                         </label>
                         <input 
-                            type="password" 
+                            id="topic"
+                            type="text" 
                             class="form-input"
                             placeholder="Topic"
-                            value={topic}
-                            onChange={(e) => setTopic(e.target.value)} 
+                            value={newProjectFormData.topic}
+                            onChange={updateFormData} 
                         />
                     </div>
                     <div>
@@ -57,11 +86,12 @@ const AddProject = () => {
                             Project Details
                         </label>
                         <textarea 
+                            id="details"
                             class="textarea textarea-info w-full my-4" 
                             rows='4'
                             placeholder="Details"
-                            value={details}
-                            onChange={(e) => setDetails(e.target.value)}
+                            value={newProjectFormData.details}
+                            onChange={updateFormData}
                         ></textarea>
                     </div>
                     <button className="btn btn-secondary w-full">

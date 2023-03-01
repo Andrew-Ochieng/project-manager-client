@@ -16,6 +16,18 @@ const Projects = () => {
             })    
     }, [])
 
+    function handleDelete(deletedProject){
+        fetch(`${apiHost}/projects/${deletedProject.id}`, {method: 'DELETE'})
+        .then((res) => {
+            if(res.ok){
+                const newProjectsList = projects.filter(project => project.id !== deletedProject.id)
+                setProjects(newProjectsList)
+            }else {
+                res.json().then(error => console.warn(error))
+            }
+        }) 
+    }
+
 
     return ( 
         <div className="grid place-items-center min-h-screen px-20">
@@ -40,8 +52,8 @@ const Projects = () => {
                                 <td className="px-3" >{project.name}</td>
                                 <td className="px-3">{project.topic}</td>
                                 <td className="px-3 max-w-sm">{project.details}</td>
-                                <td className="px-5"><button className="border-solid border border-green py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400">Edit</button></td>
-                                <td className="px-5"><button className="border-solid border border-blue py-1 px-5 rounded-md bg-red-300 hover:bg-red-400">Delete</button></td>
+                                <td className="px-5"><button className="border-solid border border-green py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400 w-100">Edit</button></td>
+                                <td className="px-5"><button className="border-solid border border-blue py-1 px-5 rounded-md bg-red-300 hover:bg-red-400 w-100" onClick={()=>handleDelete(project)}>Delete</button></td>
                             </tr>
                         ))
                     }

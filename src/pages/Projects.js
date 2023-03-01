@@ -21,7 +21,7 @@ const Projects = () => {
             <div className="flex flex-col">
                 <div className="flex justify-between my-5">
                     <h1 className="font-bold">YOUR PROJECTS</h1>
-                    <button className="border-solid border border-blue py-2 px-5 rounded-md">Add New</button>
+                    <button className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">Add New</button>
                 </div>
                 <table>
                     {
@@ -39,8 +39,8 @@ const Projects = () => {
                                 <td className="px-3" >{project.name}</td>
                                 <td className="px-3">{project.topic}</td>
                                 <td className="px-3 max-w-sm">{project.details}</td>
-                                <td className="px-5"><button>Edit</button></td>
-                                <td className="px-5"><button>Delete</button></td>
+                                <td className="px-5"><button className="border-solid border border-green py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400">Edit</button></td>
+                                <td className="px-5"><button className="border-solid border border-blue py-1 px-5 rounded-md bg-red-300 hover:bg-red-400">Delete</button></td>
                             </tr>
                         ))
                     }

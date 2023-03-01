@@ -46,8 +46,6 @@ const AddProject = () => {
                 res.json().then(error => console.warn(error))
             }
         })
-
-        alert("hello")
     }
 
     return ( 

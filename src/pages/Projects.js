@@ -1,16 +1,17 @@
 import { useState } from "react";
-
+import { apiHost } from "../Variables";
 
 const Projects = () => {
-    const [projects, setProjects] = useState("")
+    const [projects, setProjects] = useState([])
 
-    fetch("/")
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-            setProjects(data)
-        })
-    
+    fetch(`${apiHost}/projects`)
+        .then((res) => {
+            if(res.ok){
+                res.json().then(data => setProjects(data))
+            }else {
+                res.json().then(error => console.warn(error))
+            }
+        })    
 
     return ( 
         <div>

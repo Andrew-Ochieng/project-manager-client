@@ -35,7 +35,7 @@ const Signup = () => {
             if(result.ok){
                 result.json().then(data => {
                     localStorage.setItem('loggedIn', true)
-                    localStorage.setItem('user', data)
+                    localStorage.setItem('user', JSON.stringify(data))
                     setSignupFormData({email: "", username: "", password: ""})
                 })
             }else {

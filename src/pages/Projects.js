@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { apiHost } from "../Variables";
 
 const Projects = () => {
     const [projects, setProjects] = useState([])
 
-    fetch(`${apiHost}/projects`)
-        .then((res) => {
-            if(res.ok){
-                res.json().then(data => setProjects(data))
-            }else {
-                res.json().then(error => console.warn(error))
-            }
-        })    
+    useEffect(()=>{
+        fetch(`${apiHost}/projects`)
+            .then((res) => {
+                if(res.ok){
+                    res.json().then(data => setProjects(data))
+                }else {
+                    res.json().then(error => console.warn(error))
+                }
+            })    
+    }, [])
+
 
     return ( 
         <div>

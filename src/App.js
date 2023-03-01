@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import React, {useState} from 'react';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -9,16 +10,19 @@ import AddProject from './pages/Projects/AddProject';
 import Signup from './pages/Signup';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
+
+  console.log("Logged in: ", loggedIn)
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar loggedIn={loggedIn}/>
         <Routes>
           <Route path='/' element={ <Home /> } />
           <Route path='/projects' element={ <Projects /> }/>
           <Route path='/addproject' element={ <AddProject /> }/>
-          <Route path='/login' element={ <Login /> }/>
-          <Route path='/signup' element={ <Signup /> }/>
+          <Route path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> }/>
+          <Route path='/signup' element={ <Signup loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> }/>
         </Routes>
         <Footer />
       </BrowserRouter>

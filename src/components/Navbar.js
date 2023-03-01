@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"
 
-const Navbar = () => {
+const Navbar = ({loggedIn}) => {
     const [open, setOpen] = useState(false)
 
     const navLinks = [
@@ -33,39 +33,22 @@ const Navbar = () => {
                                     <Link to={navLink.route}>{navLink.name}</Link>
                                 </li>
                             ))}
-                            <li className=' md:my-0 my-4'>
-                                <Link to='/login' className="mx-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
-                                    Login
-                                </Link>
-                                <Link to='/signup' className="mx-4 bg-sky-800 px-3 py-1 hover:bg-white text-white hover:text-sky-800 duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
-                                    Signup
-                                </Link>
-                            </li>
+                            {
+                                !loggedIn ?
+                                <li className='flex flex-row md:my-0 my-4' onClick={() => setOpen((prev) => !prev)}>
+                                    <Link to='/login' className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                        Login
+                                    </Link>
+                                    <Link to='/signup' className="mx-4 my-4 bg-sky-800 px-3 py-1 hover:bg-white text-white hover:text-sky-800 duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                        Signup
+                                    </Link>
+                                </li> :
+                                <button className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                    Logout
+                                </button> 
+                           }
                         </ul>
                     </div>
-                </div>
-
-                <div className={`${open ? "left-0 " : "left-[-100%]"} sm:hidden absolute top-0 right-0 bottom-0  space-y-8 py-6 px-8 w-full h-screen duration-300 ease-in-out bg-sky-400`}>
-                    <div className="flex justify-end">
-                        <button onClick={() => setOpen((prev) => !prev)} className="mb-8 sm:hidden text-2xl text-gray-100 text-right">
-                                <FaTimes/> 
-                        </button> 
-                    </div>
-                    <ul className="flex flex-col items-center text-center text-base font-medium">
-                        {navLinks.map((navLink) => (
-                            <li onClick={() => setOpen((prev) => !prev)} className='md:mx-4 md:my-0 my-4 hover:text-white pb-6 w-1/3 border-b-2'>
-                                <Link to={navLink.route}>{navLink.name}</Link>
-                            </li>
-                        ))}
-                        <li className='flex flex-col md:my-0 my-4' onClick={() => setOpen((prev) => !prev)}>
-                            <Link to='/login' className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
-                                Login
-                            </Link>
-                            <Link to='/signup' className="mx-4 my-4 bg-sky-800 px-3 py-1 hover:bg-white text-white hover:text-sky-800 duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
-                                Signup
-                            </Link>
-                        </li>
-                    </ul>
                 </div>
             </nav>
         </>

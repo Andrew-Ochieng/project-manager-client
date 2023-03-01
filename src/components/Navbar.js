@@ -28,12 +28,14 @@ const Navbar = ({loggedIn}) => {
                     
                     <div className='md:flex hidden text-gray-700'>
                         <ul className="md:flex items-center md:text-lg font-medium">
-                            {navLinks.map((navLink) => (
-                                <li className='md:mx-4 md:my-0 my-4 hover:text-white'>
-                                    <Link to={navLink.route}>{navLink.name}</Link>
-                                </li>
-                            ))}
+                            <li className='md:mx-4 md:my-0 my-4 hover:text-white'>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li className='md:mx-4 md:my-0 my-4 hover:text-white'>
+                                <Link to="/about">About</Link>
+                            </li>                               
                             {
+
                                 !loggedIn ?
                                 <li className='flex flex-row md:my-0 my-4' onClick={() => setOpen((prev) => !prev)}>
                                     <Link to='/login' className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>

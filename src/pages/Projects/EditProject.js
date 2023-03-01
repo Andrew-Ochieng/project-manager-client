@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const EditProject = ({modalInfo, setModalInfo}) => {
     console.log("modal info: ", modalInfo)
-    const [updatedProjectFormData, setUpdatedProjectFormData] = useState(modalInfo.projecOnEdit || {})
+    const [updatedProjectFormData, setUpdatedProjectFormData] = useState(modalInfo.projectOnEdit || {})
 
     function updateFormData(e){
         setUpdatedProjectFormData(updatedProjectFormData => {
@@ -16,8 +16,8 @@ const EditProject = ({modalInfo, setModalInfo}) => {
         e.preventDefault();
         console.log(updatedProjectFormData)
 
-        fetch(`${apiHost}/projects/${modalInfo?.projecOnEdit?.id}`, {
-            method: "POST",
+        fetch(`${apiHost}/projects/${modalInfo?.projectOnEdit?.id}`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -32,24 +32,22 @@ const EditProject = ({modalInfo, setModalInfo}) => {
                 res.json().then(error => console.warn(error))
             }
         })
-
-        alert("hello")
     }
 
     return ( 
         <>
-            <div className="flex flex-col justify-center items-center md:my-16 my-8 mx-6">
-                <h1 className="font-bold uppercase md:text-2xl text-xl text-gray-800 md:mb-16 mb-8">Edit Project</h1>
+            <div className="flex flex-col justify-center items-center md:my-16 my-8 bg-gray-100 md:p-8 p-4 rounded-lg">
+                <h1 className="font-bold uppercase md:text-2xl text-xl text-gray-800 md:mb-8 mb-4">Edit Project</h1>
                 <form onSubmit={handleForm}>
                     <div>
-                        <label className='form-label'> 
+                        <label className='form-label'>
                             Project Name
                         </label>
                         <input 
                             id="name"
                             type="text"  
-                            class="form-input"
                             placeholder="Project name"
+                            className="form-input"
                             value={updatedProjectFormData.name}
                             onChange={updateFormData} 
                         />
@@ -61,8 +59,8 @@ const EditProject = ({modalInfo, setModalInfo}) => {
                         <input 
                             id="topic"
                             type="text" 
-                            class="form-input"
                             placeholder="Topic"
+                            className="form-input"
                             value={updatedProjectFormData.topic}
                             onChange={updateFormData} 
                         />
@@ -74,13 +72,14 @@ const EditProject = ({modalInfo, setModalInfo}) => {
                         <textarea 
                             id="details"
                             class="textarea textarea-info w-full my-4" 
-                            rows='4'
+                            rows='2'
                             placeholder="Details"
+                            className="form-input"  
                             value={updatedProjectFormData.details}
                             onChange={updateFormData}
                         ></textarea>
                     </div>
-                    <button className="btn btn-secondary w-full">
+                    <button className="mt-2 btn btn-secondary w-full">
                         Submit
                     </button>
                 </form>

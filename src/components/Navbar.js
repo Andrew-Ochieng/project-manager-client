@@ -31,9 +31,6 @@ const Navbar = ({loggedIn}) => {
                             <li className='md:mx-4 md:my-0 my-4 hover:text-white'>
                                 <Link to="/">Home</Link>
                             </li>
-                            <li className='md:mx-4 md:my-0 my-4 hover:text-white'>
-                                <Link to="/about">About</Link>
-                            </li>                               
                             {
 
                                 !loggedIn ?
@@ -45,9 +42,14 @@ const Navbar = ({loggedIn}) => {
                                         Signup
                                     </Link>
                                 </li> :
-                                <button className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
-                                    Logout
-                                </button> 
+                                    <>
+                                        <li className='md:mx-4 md:my-0 my-4 hover:text-white'>
+                                            <Link to="/projects">Projects</Link>
+                                        </li>                               
+                                        <button className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'>
+                                            Logout
+                                        </button> 
+                                    </>
                            }
                         </ul>
                     </div>

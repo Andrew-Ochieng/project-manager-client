@@ -152,7 +152,8 @@ function ProjectDetails(){
                         })
                     }
                 </div>     
-                <h1 className="font-bold mt-5">All Members</h1>
+                <h1 className="font-bold mt-5">All Users</h1>
+                <p className="font-sm">(Click to add as project member)</p>
                 <div className="flex flex-col gap-1">
                     {
                         

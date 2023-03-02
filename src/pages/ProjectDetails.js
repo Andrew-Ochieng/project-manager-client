@@ -1,16 +1,19 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { appContext } from "../AppContextProvider";
 
 function ProjectDetails(){
-    const {projectOnEdit, setProjectOnEdit} = useContext(appContext)
+    const {projectOnEdit} = useContext(appContext)
+    const [statusInfo, setStatusInfo] = useState({summary: "", details: ""})
 
-    console.log("wat")
-    console.log(projectOnEdit)
+    function updateStatusInfo(e){
+        setStatusInfo(statusInfo => ({...statusInfo, [e.target.id]: e.target.value}))
+    }
 
     function getDate(dateData){
         const dateInfo = new Date(dateData)
         return dateInfo.toLocaleDateString()
     }
+
     return (
         <div id="project-details" className="flex gap-5 min-w-screen p-20">
             <div id="general-info" className="flex flex-col p-4 border-2 mx-2">
@@ -52,12 +55,26 @@ function ProjectDetails(){
                     <form className="flex flex-col">
                         <div className="flex flex-col my-5">
                             <div className="">
-                                <label htmlFor="summary">Summary</label>
-                                <input name="summary" className="form-input" type="text"/>
+                                <label htmlFor="summary" className="font-bold">Summary</label>
+                                <input
+                                    id="summary" 
+                                    name="summary" 
+                                    className="form-input" 
+                                    type="text"
+                                    onChange={updateStatusInfo}
+                                    value={statusInfo.summary}
+                                />
                             </div>
                             <div className="">
-                                <label htmlFor="details">Details</label>
-                                <textarea name="details" className="textarea textarea-info w-full my-4" type="text"/>
+                                <label htmlFor="details" className="font-bold">Details</label>
+                                <textarea
+                                    id="details"
+                                    name="details"
+                                    className="textarea textarea-info w-full my-4"
+                                    type="text"
+                                    onChange={updateStatusInfo}
+                                    value={statusInfo.details}
+                                />
                             </div>
                         </div>
                         <input className="btn btn-primary" type="submit" value="Submit"/>

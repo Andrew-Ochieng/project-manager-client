@@ -42,7 +42,7 @@ const Projects = ({loggedIn}) => {
 
 
     return ( 
-        <div className="grid place-items-center min-h-screen px-20">
+        <div className="grid place-items-center min-h-screen px-20 py-20">
             <div className="flex flex-col relative">
                 <div className="flex justify-between my-5">
                     <h1 className="font-bold">YOUR PROJECTS</h1>

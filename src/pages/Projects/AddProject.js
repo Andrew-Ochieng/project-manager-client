@@ -19,6 +19,41 @@ const AddProject = () => {
 
     }
 
+    function makeCurrentUserProjectMember(newProject){
+        const newProjectId = newProject.id
+        const userId = JSON.parse(localStorage.getItem('user') || false)?.id
+
+        console.log(newProjectId, userId)
+
+        fetch(`${apiHost}/project-memberships`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({project_id: newProjectId, user_id: userId})
+        })
+        .then(res => {
+            if(res.ok){
+                res.json().then(data =>
+                    {
+                        console.log(data)
+                        setNewProjectFormData(
+                            {
+                                name: "",
+                                topic: "",
+                                details: "",
+                                user_id: JSON.parse(localStorage.getItem('user') || false)?.id
+                            }
+                        )
+                    }
+                )
+            }else {
+                res.json().then(error => console.warn(error))
+            }
+        })
+
+    }
+
     const handleForm = (e) => {
         e.preventDefault();
         console.log(newProjectFormData)
@@ -33,14 +68,7 @@ const AddProject = () => {
         .then(res => {
             if(res.ok){
                 res.json().then(data => {
-                    setNewProjectFormData(
-                        {
-                            name: "",
-                            topic: "",
-                            details: "",
-                            user_id: JSON.parse(localStorage.getItem('user') || false)?.id
-                        }
-                    )
+                    makeCurrentUserProjectMember(data)
                 })
             }else {
                 res.json().then(error => console.warn(error))

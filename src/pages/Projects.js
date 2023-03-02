@@ -46,6 +46,7 @@ const Projects = ({loggedIn}) => {
 
     function handleEdit(projectOnEdit){
         setProjectOnEdit(projectOnEdit)
+        navigate('/project-details')
     }
 
     return ( 

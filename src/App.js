@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Projects from './pages/Projects';
 import AddProject from './pages/Projects/AddProject';
 import Signup from './pages/Signup';
+import ProjectDetails from './pages/ProjectDetails';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path='/addproject' element={ <AddProject /> }/>
           <Route exact path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> }/>
           <Route exact path='/signup' element={ <Signup loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> }/>
+          <Route exact path='/project-details' element={<ProjectDetails />} />
           <Route exact path='/add-project' element={<AddProject />}/>
           <Route path='/' element={ <Home /> } />
         </Routes>

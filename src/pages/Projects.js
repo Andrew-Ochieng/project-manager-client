@@ -73,7 +73,6 @@ const Projects = ({loggedIn}) => {
                             <th>Name</th>
                             <th>Topic</th>
                             <th>Details</th>
-                            <th>Status</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -84,8 +83,7 @@ const Projects = ({loggedIn}) => {
                                 <td className="px-3" >{project.name}</td>
                                 <td className="px-3">{project.topic}</td>
                                 <td className="px-3 max-w-sm">{project.details}</td>
-                                <td className="px-3">{project.statuses[0]?.summary}</td>
-                                <td className="px-5"><button className="border-solid border border-green py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400 w-100" onClick={()=>handleEdit(project)}>Edit</button></td>
+                                <td className="px-5"><button className="border-solid border border-green py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400 w-100" onClick={()=>handleEdit(project)}>Details</button></td>
                                 <td className="px-5"><button className="border-solid border border-blue py-1 px-5 rounded-md bg-red-300 hover:bg-red-400 w-100" onClick={()=>handleDelete(project)}>Delete</button></td>
                             </tr>
                         ))

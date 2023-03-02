@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useEffect } from "react";
 import { Link , useNavigate} from "react-router-dom";
 import loginImg from "../assets/login.png"
 import { apiHost } from "../Variables";

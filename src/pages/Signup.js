@@ -13,9 +13,11 @@ const Signup = ({loggedIn, setLoggedIn}) => {
         }
     )
 
-    if(loggedIn){
-        navigate('/')
-    }
+    useEffect(()=>{
+        if(loggedIn){
+            navigate('/home')
+        }
+    }, [])
 
     function updateFormData(e){
         setSignupFormData(

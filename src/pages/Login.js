@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
 import loginImg from "../assets/login.png"
 import { apiHost } from "../Variables";
@@ -8,9 +8,11 @@ const Login = ({loggedIn, setLoggedIn}) => {
     const navigate = useNavigate()
 
 
-    if(loggedIn){
-        navigate('/')
-    }
+    useEffect(()=>{
+        if(loggedIn){
+            navigate('/home')
+        }
+    }, [])
 
     function updateFormData(e){
         setSigninFormData(

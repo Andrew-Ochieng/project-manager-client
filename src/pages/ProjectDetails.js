@@ -33,6 +33,29 @@ function ProjectDetails(){
         return uniqueUsers
     }
 
+    function addToMember(newMember){
+        const userId = newMember?.id
+        const projectId = projectOnEdit?.id
+
+        fetch(`${apiHost}/project-memberships`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({user_id: userId, project_id: projectId})
+        })
+        .then(result => {
+            if(result.ok){
+                result.json().then(data => {
+                    const projectOnEditUsers = projectOnEdit?.users || []
+                    projectOnEditUsers.push(newMember)
+                    setProjectOnEdit(projectOnEdit => ({...projectOnEdit, users: projectOnEditUsers}))})
+            }else {
+                result.json().then(error => console.warn(error))
+            }
+        }) 
+    }
+
     function updateStatusInfo(e){
         setStatusInfo(statusInfo => ({...statusInfo, [e.target.id]: e.target.value}))
     }
@@ -64,7 +87,6 @@ function ProjectDetails(){
                 result.json().then(error => console.warn(error))
             }
         })       
-
     }
 
     return (
@@ -157,13 +179,13 @@ function ProjectDetails(){
                 <div className="flex flex-col gap-1">
                     {
                         
-                        getUniqueUsers(allUsers).map(projectMember => {
+                        getUniqueUsers(allUsers).map(user => {
                             return (
-                                <div key={projectMember.id}>
+                                <div key={user.id}>
                                     <button 
                                         className="border-solid border border-blue py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400 w-100"
-                                        >
-                                        {projectMember.username}
+                                        onClick={()=> addToMember(user)}>
+                                        {user.username}
                                     </button>
                                 </div>
                             )

@@ -12,4 +12,4 @@ function AppContextProvider({children}){
     )
 }
 
-export default {appContext, AppContextProvider};
+export {appContext, AppContextProvider};

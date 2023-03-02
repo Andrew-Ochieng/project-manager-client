@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate} from "react-router-dom";
 import { apiHost } from "../Variables";
-import Home from "./Home";
 import EditProject from "./Projects/EditProject";
+import { appContext } from "../AppContextProvider";
+
 
 const Projects = ({loggedIn}) => {
     const navigate = useNavigate()
     const [projects, setProjects] = useState([])
     const [showMyProjects, setShowMyProjects] = useState(true)
     const [modalInfo, setModalInfo] = useState({showModal: false, projectOnEdit: {}})
+    const {projectOnEdit, setProjectOnEdit} = useContext(appContext)
 
     useEffect(()=>{
         if(!loggedIn){

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Projects from './pages/Projects';
 import AddProject from './pages/Projects/AddProject';
 import Signup from './pages/Signup';
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))

@@ -143,20 +143,27 @@ function ProjectDetails(){
                         getUniqueUsers(projectOnEdit.users).map(projectMember => {
                             return (
                                 <div key={projectMember.id}>
-                                    <h3>{projectMember.username}</h3>
+                                    <button 
+                                        className="border-solid border border-green py-1 px-5 rounded-md bg-red-300 hover:bg-red-400 w-100">
+                                        {projectMember.username}
+                                    </button>
                                 </div>
                             )
                         })
                     }
                 </div>     
-                <h1 className="font-bold">All Members</h1>
+                <h1 className="font-bold mt-5">All Members</h1>
                 <div className="flex flex-col gap-1">
                     {
                         
                         getUniqueUsers(allUsers).map(projectMember => {
                             return (
                                 <div key={projectMember.id}>
-                                    <h3>{projectMember.username}</h3>
+                                    <button 
+                                        className="border-solid border border-blue py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400 w-100"
+                                        >
+                                        {projectMember.username}
+                                    </button>
                                 </div>
                             )
                         })

@@ -15,7 +15,7 @@ const Signup = ({loggedIn, setLoggedIn}) => {
 
     useEffect(()=>{
         if(loggedIn){
-            navigate('/home')
+            navigate('/projects')
         }
     }, [])
 

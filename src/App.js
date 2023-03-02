@@ -17,12 +17,13 @@ function App() {
       <BrowserRouter>
         <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         <Routes>
+          <Route exact path='/home' element={ <Home /> } />
+          <Route exact path='/projects' element={ <Projects loggedIn={loggedIn}/> }/>
+          <Route exact path='/addproject' element={ <AddProject /> }/>
+          <Route exact path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> }/>
+          <Route exact path='/signup' element={ <Signup loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> }/>
+          <Route exact path='/add-project' element={<AddProject />}/>
           <Route path='/' element={ <Home /> } />
-          <Route path='/projects' element={ <Projects loggedIn={loggedIn}/> }/>
-          <Route path='/addproject' element={ <AddProject /> }/>
-          <Route path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> }/>
-          <Route path='/signup' element={ <Signup loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> }/>
-          <Route path='/add-project' element={<AddProject />}/>
         </Routes>
         <Footer />
       </BrowserRouter>

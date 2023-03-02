@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
 import { apiHost } from "../Variables";
+import Home from "./Home";
 import EditProject from "./Projects/EditProject";
 
 const Projects = ({loggedIn}) => {
@@ -9,9 +10,11 @@ const Projects = ({loggedIn}) => {
     const [showMyProjects, setShowMyProjects] = useState(true)
     const [modalInfo, setModalInfo] = useState({showModal: false, projectOnEdit: {}})
 
-    if(!loggedIn){
-        navigate('/')
-    }
+    useEffect(()=>{
+        if(!loggedIn){
+            navigate('/home')
+        }
+    }, [])
 
     useEffect(()=>{
         const projectsToShow = showMyProjects ? 
@@ -44,7 +47,6 @@ const Projects = ({loggedIn}) => {
     function handleEdit(projectOnEdit){
         setModalInfo({showModal: true, projectOnEdit: projectOnEdit})
     }
-
 
     return ( 
         <div className="min-h-screen px-20 py-20">

@@ -14,6 +14,11 @@ function ProjectDetails(){
         return dateInfo.toLocaleDateString()
     }
 
+    function handleUpdateStatus(e){
+        e.preventDefault()
+
+    }
+
     return (
         <div id="project-details" className="flex gap-5 min-w-screen p-20">
             <div id="general-info" className="flex flex-col p-4 border-2 mx-2">
@@ -52,7 +57,8 @@ function ProjectDetails(){
                             })
                         }
                     </table>
-                    <form className="flex flex-col">
+                    <h1 className="font-bold mt-10">UPDATE STATUS</h1>
+                    <form className="flex flex-col" onSubmit={handleUpdateStatus}>
                         <div className="flex flex-col my-5">
                             <div className="">
                                 <label htmlFor="summary" className="font-bold">Summary</label>

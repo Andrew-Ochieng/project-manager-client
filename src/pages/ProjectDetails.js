@@ -93,15 +93,15 @@ function ProjectDetails(){
         <div id="project-details" className="flex gap-5 min-w-screen p-20">
             <div id="general-info" className="flex flex-col p-4 border-2 mx-2">
                 <h1 className="font-bold">Project Info</h1>
-                <div className="flex gap-4">
+                <div className="flex gap-4 my-2">
                     <h1 className="w-16">Name:</h1>
                     <h1>{projectOnEdit.name}</h1>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 my-2">
                     <h1 className="w-16">Topic:</h1>
                     <h3>{projectOnEdit.topic}</h3>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 my-2">
                     <h1 className="w-16">Details:</h1>
                     <p className="w-48">{projectOnEdit.details}</p>
                 </div>

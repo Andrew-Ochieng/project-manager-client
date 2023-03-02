@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate} from "react-router-dom";
 import { apiHost } from "../Variables";
-import EditProject from "./Projects/EditProject";
 import { appContext } from "../AppContextProvider";
 
 
@@ -9,8 +8,7 @@ const Projects = ({loggedIn}) => {
     const navigate = useNavigate()
     const [projects, setProjects] = useState([])
     const [showMyProjects, setShowMyProjects] = useState(true)
-    const [modalInfo, setModalInfo] = useState({showModal: false, projectOnEdit: {}})
-    const {projectOnEdit, setProjectOnEdit} = useContext(appContext)
+    const {setProjectOnEdit} = useContext(appContext)
 
     useEffect(()=>{
         if(!loggedIn){
@@ -31,7 +29,7 @@ const Projects = ({loggedIn}) => {
                     res.json().then(error => console.warn(error))
                 }
             })    
-    }, [modalInfo, showMyProjects])
+    }, [showMyProjects])
 
     function handleDelete(deletedProject){
         fetch(`${apiHost}/projects/${deletedProject.id}`, {method: 'DELETE'})
@@ -47,7 +45,7 @@ const Projects = ({loggedIn}) => {
 
 
     function handleEdit(projectOnEdit){
-        setModalInfo({showModal: true, projectOnEdit: projectOnEdit})
+        setProjectOnEdit(projectOnEdit)
     }
 
     return ( 
@@ -92,14 +90,6 @@ const Projects = ({loggedIn}) => {
                         ))
                     }
                 </table>
-
-                {
-                    modalInfo.showModal ?
-                    <div className="absolute bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <EditProject modalInfo={modalInfo} setModalInfo={setModalInfo}/>
-                    </div> : ""
-                }
-
             </div>
         </div>
     );

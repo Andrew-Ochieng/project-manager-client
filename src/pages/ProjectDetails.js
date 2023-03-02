@@ -7,13 +7,17 @@ function ProjectDetails(){
     const [statusInfo, setStatusInfo] = useState({project_id: projectOnEdit?.id, summary: "", details: ""})
 
 
-    const uniqueProjectMembers = []
-    projectOnEdit.users?.forEach(user => {
-        const memberExists = !!uniqueProjectMembers.find(member => member?.id === user.id)
-        if(!memberExists){
-            uniqueProjectMembers.push(user)
-        }
-    })
+    function getUniqueUsers(users){
+        const uniqueUsers = []
+        users.forEach(user => {
+            const memberExists = !!uniqueUsers.find(member => member?.id === user.id)
+            if(!memberExists){
+                uniqueUsers.push(user)
+            }
+        })
+
+        return uniqueUsers
+    }
 
     function updateStatusInfo(e){
         setStatusInfo(statusInfo => ({...statusInfo, [e.target.id]: e.target.value}))
@@ -122,7 +126,7 @@ function ProjectDetails(){
                 <div className="flex flex-col gap-1">
                     {
                         
-                        uniqueProjectMembers.map(projectMember => {
+                        getUniqueUsers(projectOnEdit.users).map(projectMember => {
                             return (
                                 <div key={projectMember.id}>
                                     <h3>{projectMember.username}</h3>

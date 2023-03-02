@@ -53,13 +53,13 @@ const Projects = ({loggedIn}) => {
                     <h1 className="font-bold">YOUR PROJECTS</h1>
                     <div className="flex gap-5">
                         <button to="/add-project" 
-                                className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400"
+                                className="border-solid border border-blue py-2 px-5 w-40 rounded-md bg-green-300 hover:bg-green-400"
                                 onClick={()=>setShowMyProjects(showMyProjects => !showMyProjects)}
                             >
                             {showMyProjects ? 'See All Projects' : 'See My Projects'}
                         </button>
                         <button onClick={()=>navigate('/add-project')}
-                            className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">
+                            className="border-solid border border-blue py-2 px-5 w-40 rounded-md bg-green-300 hover:bg-green-400">
                             Add New
                         </button>
                     </div>

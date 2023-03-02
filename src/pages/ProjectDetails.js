@@ -1,15 +1,29 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { appContext } from "../AppContextProvider";
 import { apiHost } from "../Variables";
 
 function ProjectDetails(){
     const {projectOnEdit,setProjectOnEdit} = useContext(appContext)
     const [statusInfo, setStatusInfo] = useState({project_id: projectOnEdit?.id, summary: "", details: ""})
+    const [allUsers, setAllUsers] = useState([])
+
+    useEffect(()=>{
+        fetch(`${apiHost}/users`)
+        .then(result => {
+            if(result.ok){
+                result.json().then(data => {
+                    setAllUsers(data)
+                })
+            }else {
+                result.json().then(error => console.warn(error))
+            }
+        })    
+    }, [projectOnEdit])
 
 
     function getUniqueUsers(users){
         const uniqueUsers = []
-        users.forEach(user => {
+        users?.forEach(user => {
             const memberExists = !!uniqueUsers.find(member => member?.id === user.id)
             if(!memberExists){
                 uniqueUsers.push(user)
@@ -134,7 +148,20 @@ function ProjectDetails(){
                             )
                         })
                     }
-                </div>                
+                </div>     
+                <h1 className="font-bold">All Members</h1>
+                <div className="flex flex-col gap-1">
+                    {
+                        
+                        getUniqueUsers(allUsers).map(projectMember => {
+                            return (
+                                <div key={projectMember.id}>
+                                    <h3>{projectMember.username}</h3>
+                                </div>
+                            )
+                        })
+                    }
+                </div>            
             </div>
         </div>
     )

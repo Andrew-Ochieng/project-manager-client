@@ -6,6 +6,15 @@ function ProjectDetails(){
     const {projectOnEdit,setProjectOnEdit} = useContext(appContext)
     const [statusInfo, setStatusInfo] = useState({project_id: projectOnEdit?.id, summary: "", details: ""})
 
+
+    const uniqueProjectMembers = []
+    projectOnEdit.users?.forEach(user => {
+        const memberExists = !!uniqueProjectMembers.find(member => member?.id === user.id)
+        if(!memberExists){
+            uniqueProjectMembers.push(user)
+        }
+    })
+
     function updateStatusInfo(e){
         setStatusInfo(statusInfo => ({...statusInfo, [e.target.id]: e.target.value}))
     }
@@ -112,7 +121,8 @@ function ProjectDetails(){
                 <h1 className="font-bold">Project Members</h1>
                 <div className="flex flex-col gap-1">
                     {
-                        projectOnEdit.users?.map(projectMember => {
+                        
+                        uniqueProjectMembers.map(projectMember => {
                             return (
                                 <div key={projectMember.id}>
                                     <h3>{projectMember.username}</h3>

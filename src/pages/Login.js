@@ -40,6 +40,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
                     localStorage.setItem('user', JSON.stringify(data))
                     setSigninFormData({username: "", password: ""})
                     setLoggedIn(true)
+                    navigate('/projects')
                 })
             }else {
                 result.json().then(error => console.warn(error))

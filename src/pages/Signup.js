@@ -45,6 +45,7 @@ const Signup = ({loggedIn, setLoggedIn}) => {
                     localStorage.setItem('user', JSON.stringify(data))
                     setSignupFormData({email: "", username: "", password: ""})
                     setLoggedIn(true)
+                    navigate('/projects')
                 })
             }else {
                 result.json().then(error => console.warn(error))

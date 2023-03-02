@@ -79,7 +79,7 @@ const EditProject = ({modalInfo, setModalInfo}) => {
                             onChange={updateFormData}
                         ></textarea>
                     </div>
-                    <button className="mt-2 btn btn-secondary w-full">
+                    <button className="mt-2 btn btn-secondary w-full" onClick={handleForm}>
                         Submit
                     </button>
                 </form>

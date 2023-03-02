@@ -6,6 +6,7 @@ import EditProject from "./Projects/EditProject";
 const Projects = ({loggedIn}) => {
     const navigate = useNavigate()
     const [projects, setProjects] = useState([])
+    const [showMyProjects, setShowMyProjects] = useState(true)
     const [modalInfo, setModalInfo] = useState({showModal: false, projectOnEdit: {}})
 
     if(!loggedIn){
@@ -13,7 +14,11 @@ const Projects = ({loggedIn}) => {
     }
 
     useEffect(()=>{
-        fetch(`${apiHost}/projects`)
+        const projectsToShow = showMyProjects ? 
+                `my-projects/${JSON.parse(localStorage.getItem('user') || false)?.id}` :
+                'projects'
+
+        fetch(`${apiHost}/${projectsToShow}`)
             .then((res) => {
                 if(res.ok){
                     res.json().then(data => setProjects(data))
@@ -21,7 +26,7 @@ const Projects = ({loggedIn}) => {
                     res.json().then(error => console.warn(error))
                 }
             })    
-    }, [modalInfo])
+    }, [modalInfo, showMyProjects])
 
     function handleDelete(deletedProject){
         fetch(`${apiHost}/projects/${deletedProject.id}`, {method: 'DELETE'})
@@ -42,14 +47,16 @@ const Projects = ({loggedIn}) => {
 
 
     return ( 
-        <div className="grid place-items-center min-h-screen px-20 py-20">
+        <div className="min-h-screen px-20 py-20">
             <div className="flex flex-col relative">
                 <div className="flex justify-between my-5">
                     <h1 className="font-bold">YOUR PROJECTS</h1>
                     <div>
                         <button to="/add-project" 
-                            className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">
-                            All Projects
+                                className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400"
+                                onClick={()=>setShowMyProjects(showMyProjects => !showMyProjects)}
+                            >
+                            {showMyProjects ? 'See All Projects' : 'See My Projects'}
                         </button>
                         <Link to="/add-project"
                             className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">

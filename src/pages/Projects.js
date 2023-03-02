@@ -51,17 +51,17 @@ const Projects = ({loggedIn}) => {
             <div className="flex flex-col relative">
                 <div className="flex justify-between my-5">
                     <h1 className="font-bold">YOUR PROJECTS</h1>
-                    <div>
+                    <div className="flex gap-5">
                         <button to="/add-project" 
                                 className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400"
                                 onClick={()=>setShowMyProjects(showMyProjects => !showMyProjects)}
                             >
                             {showMyProjects ? 'See All Projects' : 'See My Projects'}
                         </button>
-                        <Link to="/add-project"
+                        <button onClick={()=>navigate('/add-project')}
                             className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">
                             Add New
-                        </Link>
+                        </button>
                     </div>
                 </div>
                 <table>

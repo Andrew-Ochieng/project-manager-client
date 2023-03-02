@@ -1,9 +1,10 @@
 import React, {useContext, useState} from "react";
 import { appContext } from "../AppContextProvider";
+import { apiHost } from "../Variables";
 
 function ProjectDetails(){
-    const {projectOnEdit} = useContext(appContext)
-    const [statusInfo, setStatusInfo] = useState({summary: "", details: ""})
+    const {projectOnEdit,setProjectOnEdit} = useContext(appContext)
+    const [statusInfo, setStatusInfo] = useState({project_id: projectOnEdit?.id, summary: "", details: ""})
 
     function updateStatusInfo(e){
         setStatusInfo(statusInfo => ({...statusInfo, [e.target.id]: e.target.value}))
@@ -16,6 +17,26 @@ function ProjectDetails(){
 
     function handleUpdateStatus(e){
         e.preventDefault()
+
+        fetch(`${apiHost}/statuses`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(statusInfo)
+        })
+        .then(result => {
+            if(result.ok){
+                result.json().then(data => {
+                    const projectOnEditStatuses = projectOnEdit?.statuses || []
+                    projectOnEditStatuses.push(data)
+                    setProjectOnEdit(projectOnEdit => ({...projectOnEdit, statuses: projectOnEditStatuses}))
+                    setStatusInfo({project_id: projectOnEdit?.id, summary: "", details: ""})
+                })
+            }else {
+                result.json().then(error => console.warn(error))
+            }
+        })       
 
     }
 
@@ -92,7 +113,6 @@ function ProjectDetails(){
                 <div className="flex flex-col gap-1">
                     {
                         projectOnEdit.users?.map(projectMember => {
-                            console.log(projectMember)
                             return (
                                 <div key={projectMember.id}>
                                     <h3>{projectMember.username}</h3>

@@ -49,6 +49,19 @@ function ProjectDetails(){
                             })
                         }
                     </table>
+                    <form className="flex flex-col">
+                        <div className="flex flex-col my-5">
+                            <div className="">
+                                <label htmlFor="summary">Summary</label>
+                                <input name="summary" className="form-input" type="text"/>
+                            </div>
+                            <div className="">
+                                <label htmlFor="details">Details</label>
+                                <textarea name="details" className="textarea textarea-info w-full my-4" type="text"/>
+                            </div>
+                        </div>
+                        <input className="btn btn-primary" type="submit" value="Submit"/>
+                    </form>
                 </div>
             </div>
             <div id="project-members" className="flex flex-col p-4 border-2 mx-2">

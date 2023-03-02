@@ -7,7 +7,6 @@ import { appContext } from "../AppContextProvider";
 const Projects = ({loggedIn}) => {
     const navigate = useNavigate()
     const [projects, setProjects] = useState([])
-    const [showMyProjects, setShowMyProjects] = useState(true)
     const {setProjectOnEdit} = useContext(appContext)
 
     useEffect(()=>{
@@ -17,11 +16,7 @@ const Projects = ({loggedIn}) => {
     }, [])
 
     useEffect(()=>{
-        const projectsToShow = showMyProjects ? 
-                `my-projects/${JSON.parse(localStorage.getItem('user') || false)?.id}` :
-                'projects'
-
-        fetch(`${apiHost}/${projectsToShow}`)
+        fetch(`${apiHost}/${`my-projects/${JSON.parse(localStorage.getItem('user') || false)?.id}`}`)
             .then((res) => {
                 if(res.ok){
                     res.json().then(data => setProjects(data))
@@ -29,7 +24,7 @@ const Projects = ({loggedIn}) => {
                     res.json().then(error => console.warn(error))
                 }
             })    
-    }, [showMyProjects])
+    }, [])
 
     function handleDelete(deletedProject){
         fetch(`${apiHost}/projects/${deletedProject.id}`, {method: 'DELETE'})
@@ -55,12 +50,6 @@ const Projects = ({loggedIn}) => {
                 <div className="flex justify-between my-5">
                     <h1 className="font-bold">YOUR PROJECTS</h1>
                     <div className="flex gap-5">
-                        <button to="/add-project" 
-                                className="border-solid border border-blue py-2 px-5 w-40 rounded-md bg-green-300 hover:bg-green-400"
-                                onClick={()=>setShowMyProjects(showMyProjects => !showMyProjects)}
-                            >
-                            {showMyProjects ? 'See All Projects' : 'See My Projects'}
-                        </button>
                         <button onClick={()=>navigate('/add-project')}
                             className="border-solid border border-blue py-2 px-5 w-40 rounded-md bg-green-300 hover:bg-green-400">
                             Add New

@@ -24,7 +24,6 @@ const Navbar = ({loggedIn, setLoggedIn}) => {
                 <div className='md:flex items-center justify-between'>
                     <div className="flex justify-between items-center">
                         <Link to='/' className='md:text-2xl text-lg uppercase font-semibold '>
-                            {/* <img className="md:w-32 w-28 " src={logo} alt="Logo.." /> */}
                             Project Manager
                         </Link>
                         

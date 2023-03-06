@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link , useNavigate} from "react-router-dom";
 import loginImg from "../assets/login.png"
 import { apiHost } from "../Variables";
@@ -8,9 +8,11 @@ const Login = ({loggedIn, setLoggedIn}) => {
     const navigate = useNavigate()
 
 
-    if(loggedIn){
-        navigate('/')
-    }
+    useEffect(()=>{
+        if(loggedIn){
+            navigate('/projects')
+        }
+    }, [])
 
     function updateFormData(e){
         setSigninFormData(
@@ -24,7 +26,6 @@ const Login = ({loggedIn, setLoggedIn}) => {
     function handleForm(e) {
         e.preventDefault();
 
-        console.log(`${apiHost}/login`)
         fetch(`${apiHost}/login`, {
             method: "POST",
             headers: {
@@ -39,6 +40,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
                     localStorage.setItem('user', JSON.stringify(data))
                     setSigninFormData({username: "", password: ""})
                     setLoggedIn(true)
+                    navigate('/projects')
                 })
             }else {
                 result.json().then(error => console.warn(error))

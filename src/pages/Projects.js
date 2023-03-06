@@ -1,12 +1,22 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate} from "react-router-dom";
 import { apiHost } from "../Variables";
+import { appContext } from "../AppContextProvider";
 
-const Projects = () => {
+
+const Projects = ({loggedIn}) => {
+    const navigate = useNavigate()
     const [projects, setProjects] = useState([])
+    const {setProjectOnEdit} = useContext(appContext)
 
     useEffect(()=>{
-        fetch(`${apiHost}/projects`)
+        if(!loggedIn){
+            navigate('/home')
+        }
+    }, [])
+
+    useEffect(()=>{
+        fetch(`${apiHost}/${`my-projects/${JSON.parse(localStorage.getItem('user') || false)?.id}`}`)
             .then((res) => {
                 if(res.ok){
                     res.json().then(data => setProjects(data))
@@ -29,12 +39,22 @@ const Projects = () => {
     }
 
 
+    function handleEdit(projectOnEdit){
+        setProjectOnEdit(projectOnEdit)
+        navigate('/project-details')
+    }
+
     return ( 
-        <div className="grid place-items-center min-h-screen px-20">
-            <div className="flex flex-col">
+        <div className="min-h-screen px-20 py-20">
+            <div className="flex flex-col relative">
                 <div className="flex justify-between my-5">
                     <h1 className="font-bold">YOUR PROJECTS</h1>
-                    <Link to="/add-project" className="border-solid border border-blue py-2 px-5 rounded-md bg-green-300 hover:bg-green-400">Add New</Link>
+                    <div className="flex gap-5">
+                        <button onClick={()=>navigate('/add-project')}
+                            className="border-solid border border-blue py-2 px-5 w-40 rounded-md bg-green-300 hover:bg-green-400">
+                            Add New
+                        </button>
+                    </div>
                 </div>
                 <table>
                     {
@@ -52,7 +72,7 @@ const Projects = () => {
                                 <td className="px-3" >{project.name}</td>
                                 <td className="px-3">{project.topic}</td>
                                 <td className="px-3 max-w-sm">{project.details}</td>
-                                <td className="px-5"><button className="border-solid border border-green py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400 w-100">Edit</button></td>
+                                <td className="px-5"><button className="border-solid border border-green py-1 px-5 rounded-md bg-blue-300 hover:bg-blue-400 w-100" onClick={()=>handleEdit(project)}>Details</button></td>
                                 <td className="px-5"><button className="border-solid border border-blue py-1 px-5 rounded-md bg-red-300 hover:bg-red-400 w-100" onClick={()=>handleDelete(project)}>Delete</button></td>
                             </tr>
                         ))

@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"
 import { apiHost } from "../Variables";
 
 const Navbar = ({loggedIn, setLoggedIn}) => {
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
 
     function logoutUser(){
         localStorage.clear()
         setLoggedIn(false)
-        
+        navigate('/')
+
         fetch(`${apiHost}/logout`, {method: 'DELETE'})
         .then(res => {
             if(!res.ok){
@@ -50,7 +52,7 @@ const Navbar = ({loggedIn, setLoggedIn}) => {
                                 </li> :
                                 <>
                                     <li className='md:mx-4 md:my-0 my-4 hover:text-white'>
-                                        <Link to="/projects">Projects</Link>
+                                        <Link to="/pets">Pets</Link>
                                     </li>                               
                                     <button className="mx-4 my-4 bg-white px-3 py-1 hover:bg-sky-800 hover:text-white duration-500 rounded-md" href='https://learn.vabrisetech.co.ke/'
                                         onClick={logoutUser}>
